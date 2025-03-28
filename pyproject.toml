@@ -1,6 +1,6 @@
 [project]
 name = "uvtest"
-version = "0.2.1"
+version = "0.3.0"
 description = "Test uv packaging with subpackages"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -11,9 +11,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-where = ["src"]
-include = ["uvtest*"]
+where = ["config", "packages", "services"]
+include = ["*"]
 exclude = ["tests*"]
 
 [tool.pytest.ini_options]
-pythonpath = "src"
+pythonpath = ["config", "packages", "services"]
+
+[project.scripts]
+uvtest-ingest = "services.data_ingestion.ingest_data:ingest"
